@@ -24,7 +24,14 @@ Route::view('/contact', 'pages.contact');
 
 // Satu controller banyak method
 // Rute untuk halaman product ('/product'), langsung mengembalikan view tanpa data tambahan
-Route::get('/product', [ProdukController::class, 'getProduk']);
+Route::get('/product', [ProdukController::class, 'index']); // menampilkan data
 
 // Rute untuk halaman tambah produk ('/product/tambah'), mengarahkan ke method 'tambahProduk' pada ProdukController
-Route::get('/product/tambah', [ProdukController::class, 'tambahProduk']);
+Route::get('/product/create', [ProdukController::class, 'create']); // mengarahkan ke method 'create' pada ProdukController
+Route::post('/product',[ProdukController::class, 'store']); // mengelola data yang telah dikirim dari form data
+Route::get('/product/{id}', [ProdukController::class, 'show']); // menampilkan detail produk berdasarkan ID
+
+Route::get('/product/{id}/edit', [ProdukController::class, 'edit']); // mengarahkan ke method 'edit' pada ProdukController
+Route::put('/product/{id}', [ProdukController::class, 'update']); // meng
+
+

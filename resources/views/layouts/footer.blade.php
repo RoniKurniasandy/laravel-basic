@@ -2,7 +2,8 @@
 <!-- CSS untuk styling footer -->
 <style>
         .footer {
-            position: absolute; /* Footer berada di bawah halaman */
+            position: fixed; /* Footer berada di bawah halaman */
+            left: 0;
             bottom: 0;
             right: 0;
             height: 50px;
@@ -11,6 +12,7 @@
             color: white; /* Warna teks */
             text-align: center; /* Teks rata tengah */
             line-height: 50px; /* Vertikal rata tengah */
+            z-index: 100;
         }
 </style>
 

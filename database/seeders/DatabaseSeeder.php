@@ -6,18 +6,15 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class DatabaseSeeder extends Seeder // Seeder utama yang akan menjalankan seeder lainnya
 {
     /**
      * Seed the application's database.
      */
-    public function run(): void
+    public function run(): void // Fungsi yang dijalankan saat seeder dijalankan
     {
-        // User::factory(10)->create();
+        // \App\Models\User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call(ProdukSeeder::class); // Memanggil seeder ProdukSeeder untuk mengisi data produk
     }
 }
