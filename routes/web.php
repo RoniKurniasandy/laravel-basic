@@ -32,6 +32,8 @@ Route::post('/product',[ProdukController::class, 'store']); // mengelola data ya
 Route::get('/product/{id}', [ProdukController::class, 'show']); // menampilkan detail produk berdasarkan ID
 
 Route::get('/product/{id}/edit', [ProdukController::class, 'edit']); // mengarahkan ke method 'edit' pada ProdukController
-Route::put('/product/{id}', [ProdukController::class, 'update']); // meng
+Route::put('/product/{id}', [ProdukController::class, 'update']); // mengelola data yang telah dikirim dari form edit produk
+
+Route::delete('/product/{id}', [ProdukController::class, 'destroy']); // menghapus data produk berdasarkan ID
 
 

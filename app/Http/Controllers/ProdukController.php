@@ -9,7 +9,7 @@ use App\Models\produk; // Import model produk
 class ProdukController extends Controller
 {
     // Method untuk menampilkan halaman daftar produk
-    public function index()
+    public function index(Request $request)
     {
         // Data toko yang akan dikirim ke view
         $toko = [
@@ -17,7 +17,16 @@ class ProdukController extends Controller
             'alamat'=> 'Jl. Toko No. 1',
             'type'=> 'Ruko',
         ];
-        $produk = produk::get(); // Mengambil semua data produk dari model produk
+
+        $search = $request->keyword; // Mengambil keyword pencarian dari input form
+
+        $produk = produk::when($search,function($query,$search){
+            return $query->where('nama_produk', 'like', "%{$search}%");
+        })->get(); // Mengambil semua data produk dari model produk berdasarkan keyword pencarian
+        // Mengambil semua data produk dari model produk
+
+
+        
         // $queryBuilder = DB::table('tb_produk')->get{}; // Mengambil semua data produk menggunakan query builder
         return view('pages.produk.show',[ // Mengembalikan view 'pages.product' beserta data toko
             'data_toko' => $toko,
@@ -80,10 +89,18 @@ class ProdukController extends Controller
         produk::where ('id_produk',$id)->update([
             'nama_produk'=> $request->nama_produk, // Mengambil nama produk dari input form
             'harga'=> $request->harga_produk, // Mengambil nama produk dari input form
-            'deskripsi'=> $request->deskripsi_produk, // Mengambil nama produk dari input form
+            'deskripsi_produk'=> $request->deskripsi, // Mengambil nama produk dari input form
         ]);
 
-        return redirect('/product')->with('pesan', 'berhasil mengupdate data'); // Mengarahkan kembali ke halaman daftar produk dengan pesan sukses
+        return redirect('/product')->with('pesan', 'Berhasil Mengupdate Data'); 
+        // Mengarahkan kembali ke halaman daftar produk dengan pesan sukses
 
+    }
+
+    public function destroy($id) {
+        // query untuk menghapus data produk berdasarkan ID
+        produk::findOrFail($id)->delete(); // Menghapus data produk berdasarkan ID yang diberikan
+
+        return redirect('/product')->with('pesan', 'Berhasil Menghapus Data'); // Mengarahkan kembali ke halaman daftar produk dengan pesan sukses
     }
 }

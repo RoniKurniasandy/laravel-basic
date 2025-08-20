@@ -1,15 +1,12 @@
 
 @extends('layouts.master') <!-- Menggunakan layout utama 'master' -->
-
 @section('konten') <!-- Awal section 'konten' yang akan diisi pada layout master -->
-
 <h1>Update Daftar Produk</h1>
     <div class="card"> <!-- Awal card Bootstrap -->
         <div class="card-header">Update data produk</div> <!-- Header card -->
         <div class="card-body"> <!-- Body card -->
-            <form action="/product/{{ $data->id_product }}" method="POST"> <!-- Form untuk menambah produk, dikirim ke /product dengan metode POST -->
+            <form action="/product/{{ $data->id_produk }}" method="POST"> <!-- Form untuk menambah produk, dikirim ke /product dengan metode POST -->
                     @method('PUT') <!-- Metode PUT untuk update data -->
-
                     @csrf <!-- Token CSRF untuk keamanan form -->
                 <div class="row"> <!-- Awal row Bootstrap -->
                     <div class="col-sm-6"> <!-- Kolom kiri (setengah lebar) -->
@@ -49,3 +46,9 @@
         </div>
     </div>
 @endsection <!-- Akhir section 'konten' -->
+
+
+
+
+
+
